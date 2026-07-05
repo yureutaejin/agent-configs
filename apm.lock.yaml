@@ -1,6 +1,31 @@
 lockfile_version: '1'
-generated_at: '2026-07-05T10:01:10.343805+00:00'
-dependencies: []
+generated_at: '2026-07-05T11:14:05.820399+00:00'
+apm_version: 0.23.1
+dependencies:
+- repo_url: yureutaejin/agent-configs
+  name: agent-configs
+  host: github.com
+  resolved_commit: c529a69aa40125240ed74694e62bf6ad7c0e7fad
+  resolved_ref: c529a69a
+  version: 1.0.0
+  package_type: apm_package
+  deployed_files:
+  - .agents/skills/pr-description
+  - .agents/skills/pr-description/SKILL.md
+  - .agents/skills/pr-description/references/format.md
+  - .agents/skills/pr-description/scripts/collect-pr-context.sh
+  - .claude/skills/pr-description
+  - .claude/skills/pr-description/SKILL.md
+  - .claude/skills/pr-description/references/format.md
+  - .claude/skills/pr-description/scripts/collect-pr-context.sh
+  deployed_file_hashes:
+    .agents/skills/pr-description/SKILL.md: sha256:29ffb0c7c6be984d1128a3b95dd343849b859535641cdb0491d6ed77c57449ee
+    .agents/skills/pr-description/references/format.md: sha256:deac0b43fa2a057709ac4e5ecb7442304d1ef78e2bb76c56737d4f1d90488b68
+    .agents/skills/pr-description/scripts/collect-pr-context.sh: sha256:80f4085e02a119dce062ab131fc844b58f6bc3a330de773bca0497360fdf887e
+    .claude/skills/pr-description/SKILL.md: sha256:29ffb0c7c6be984d1128a3b95dd343849b859535641cdb0491d6ed77c57449ee
+    .claude/skills/pr-description/references/format.md: sha256:deac0b43fa2a057709ac4e5ecb7442304d1ef78e2bb76c56737d4f1d90488b68
+    .claude/skills/pr-description/scripts/collect-pr-context.sh: sha256:80f4085e02a119dce062ab131fc844b58f6bc3a330de773bca0497360fdf887e
+  content_hash: sha256:16248d7fcd81aecfd72594d568a1b9147acf2121ae3a2c13346eaceca95f04a0
 local_deployed_files:
 - .agents/skills/pr-description
 - .agents/skills/pr-description/SKILL.md
