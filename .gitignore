@@ -1,0 +1,6 @@
+# APM dependencies
+apm_modules/
+
+.claude
+.codex
+.agents
