@@ -1,0 +1,42 @@
+{
+  "name": "agent-configs",
+  "remoteUser": "vscode",
+  "containerUser": "vscode",
+  "mounts": [
+    {
+      "source": "${localEnv:HOME}/.codex",
+      "target": "/home/vscode/.codex",
+      "type": "bind"
+    },
+    {
+      "source": "${localEnv:HOME}/.claude",
+      "target": "/home/vscode/.claude",
+      "type": "bind"
+    }
+  ],
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bierner.markdown-mermaid",
+        "eamodio.gitlens",
+        "GitHub.vscode-pull-request-github",
+        "mhutchie.git-graph",
+        "openai.chatgpt",
+        "yzhang.markdown-all-in-one"
+      ],
+      "settings": {
+        "editor.formatOnSave": true
+      }
+    }
+  },
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
+  "initializeCommand": "mkdir -p $HOME/.codex $HOME/.claude", // Ensure that the mounted directories exist.
+  "postCreateCommand": {
+    "setup-user.sh": "bash ${containerWorkspaceFolder}/.devcontainer/setup.user.sh"
+  }
+}
