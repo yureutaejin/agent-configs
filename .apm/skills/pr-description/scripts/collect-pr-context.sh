@@ -13,8 +13,8 @@ Usage: collect-pr-context.sh [options]
 Collect git context for drafting a PR description.
 
 Options:
-  --base <ref>        Compare from this base ref. Default: origin/HEAD, main, or master.
-  --head <ref>        Compare to this head ref. Default: HEAD.
+  --base <ref>        Compare from this branch, commit hash, or tag. Default: origin default branch, then main or master.
+  --head <ref>        Compare to this branch, commit hash, or tag. Default: HEAD.
   --working-tree      Use unstaged/staged working tree diff instead of a base...head range.
   --max-commits <n>   Limit recent commits. Default: 30 for PR ranges, 10 for working tree.
   -h, --help          Show this help.
@@ -122,24 +122,24 @@ ref_exists() {
   git rev-parse --verify --quiet "$1^{commit}" >/dev/null
 }
 
-# Resolve the best available base branch for comparing the PR branch.
+# Resolve the default branch for standalone collector use. Skill callers choose
+# explicitly when local and origin refs point to different commits.
 detect_default_base() {
-  local candidate
+  local remote_default
 
-  candidate="$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null || true)"
-  if [ -n "$candidate" ] && ref_exists "$candidate"; then
-    printf '%s\n' "$candidate"
+  remote_default="$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null || true)"
+  if [ -n "$remote_default" ] && ref_exists "$remote_default"; then
+    printf '%s\n' "$remote_default"
     return 0
   fi
 
-  for candidate in main master origin/main origin/master; do
+  local candidate
+  for candidate in main origin/main master origin/master; do
     if ref_exists "$candidate"; then
       printf '%s\n' "$candidate"
       return 0
     fi
   done
-
-  return 0
 }
 
 # Resolve the base ref, using user input first and auto-detection second.
@@ -151,25 +151,38 @@ resolve_base_ref() {
   fi
 }
 
-# Build the git diff range when base and head refs are available.
+# Build the git diff range from validated base and head refs.
 build_diff_range() {
   local base_ref="$1"
   local head_ref="$2"
 
-  if [ -n "$base_ref" ] && ref_exists "$base_ref" && ref_exists "$head_ref"; then
-    printf '%s...%s\n' "$base_ref" "$head_ref"
+  printf '%s...%s\n' "$base_ref" "$head_ref"
+}
+
+# Stop when an explicit or resolved comparison ref cannot be resolved.
+validate_comparison_refs() {
+  local base_ref="$1"
+
+  if ! ref_exists "$HEAD_REF"; then
+    printf 'Head ref does not resolve to a commit: %s\n' "$HEAD_REF" >&2
+    exit 2
+  fi
+
+  if [ -z "$base_ref" ] || ! ref_exists "$base_ref"; then
+    printf 'Base ref does not resolve to a commit: %s\n' "${base_ref:-<none>}" >&2
+    exit 2
   fi
 }
 
-# Run git diff against the PR range, falling back to the working tree diff.
+# Run git diff against the selected PR range or working tree.
 run_diff() {
   local diff_range="$1"
   shift
 
-  if [ -n "$diff_range" ]; then
-    git diff "$@" "$diff_range"
-  else
+  if [ "$WORKING_TREE" -eq 1 ]; then
     git diff "$@"
+  else
+    git diff "$@" "$diff_range"
   fi
 }
 
@@ -187,10 +200,8 @@ print_repository() {
 
   if [ "$WORKING_TREE" -eq 1 ]; then
     printf 'Comparison: working tree\n'
-  elif [ -n "$diff_range" ]; then
-    printf 'Comparison: %s\n' "$diff_range"
   else
-    printf 'Comparison: working tree (no base ref found for %s)\n' "$head_ref"
+    printf 'Comparison: %s\n' "$diff_range"
   fi
 
   [ -n "$base_ref" ] && printf 'Base ref: %s\n' "$base_ref"
@@ -226,10 +237,10 @@ print_recent_commits() {
   local diff_range="$3"
 
   section "Recent Commits"
-  if [ -n "$diff_range" ]; then
-    git log --oneline --decorate --max-count="$MAX_COMMITS" "$base_ref..$head_ref"
-  else
+  if [ "$WORKING_TREE" -eq 1 ]; then
     git log --oneline --decorate --max-count="$MAX_COMMITS" "$head_ref"
+  else
+    git log --oneline --decorate --max-count="$MAX_COMMITS" "$base_ref..$head_ref"
   fi
 }
 
@@ -263,6 +274,7 @@ main() {
 
   if [ "$WORKING_TREE" -eq 0 ]; then
     base_ref="$(resolve_base_ref)"
+    validate_comparison_refs "$base_ref"
     diff_range="$(build_diff_range "$base_ref" "$HEAD_REF")"
   fi
 

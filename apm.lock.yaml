@@ -1,6 +1,6 @@
 lockfile_version: '1'
-generated_at: '2026-07-05T11:14:05.820399+00:00'
-apm_version: 0.23.1
+generated_at: '2026-08-30T12:02:56.290066+00:00'
+apm_version: 0.28.0
 dependencies:
 - repo_url: yureutaejin/agent-configs
   name: agent-configs
@@ -19,13 +19,94 @@ dependencies:
   - .claude/skills/pr-description/references/format.md
   - .claude/skills/pr-description/scripts/collect-pr-context.sh
   deployed_file_hashes:
-    .agents/skills/pr-description/SKILL.md: sha256:29ffb0c7c6be984d1128a3b95dd343849b859535641cdb0491d6ed77c57449ee
-    .agents/skills/pr-description/references/format.md: sha256:deac0b43fa2a057709ac4e5ecb7442304d1ef78e2bb76c56737d4f1d90488b68
-    .agents/skills/pr-description/scripts/collect-pr-context.sh: sha256:80f4085e02a119dce062ab131fc844b58f6bc3a330de773bca0497360fdf887e
-    .claude/skills/pr-description/SKILL.md: sha256:29ffb0c7c6be984d1128a3b95dd343849b859535641cdb0491d6ed77c57449ee
-    .claude/skills/pr-description/references/format.md: sha256:deac0b43fa2a057709ac4e5ecb7442304d1ef78e2bb76c56737d4f1d90488b68
-    .claude/skills/pr-description/scripts/collect-pr-context.sh: sha256:80f4085e02a119dce062ab131fc844b58f6bc3a330de773bca0497360fdf887e
+    .agents/skills/pr-description/SKILL.md: sha256:9ee671b574be0de3cf89faba11cce93685428a98dcc1be63f759fac0205befbe
+    .agents/skills/pr-description/references/format.md: sha256:4c1b97e092e67688d557c1ce68c92aeb02e8bc0672bda282802b781ca3248c62
+    .agents/skills/pr-description/scripts/collect-pr-context.sh: sha256:27387103373d4590773eca2d76883e529bd96cadcb7b42c653e6b37ebc11b17a
+    .claude/skills/pr-description/SKILL.md: sha256:9ee671b574be0de3cf89faba11cce93685428a98dcc1be63f759fac0205befbe
+    .claude/skills/pr-description/references/format.md: sha256:4c1b97e092e67688d557c1ce68c92aeb02e8bc0672bda282802b781ca3248c62
+    .claude/skills/pr-description/scripts/collect-pr-context.sh: sha256:27387103373d4590773eca2d76883e529bd96cadcb7b42c653e6b37ebc11b17a
   content_hash: sha256:16248d7fcd81aecfd72594d568a1b9147acf2121ae3a2c13346eaceca95f04a0
+deployments:
+- kind: project-relative
+  target: claude
+  value: .claude/skills/pr-description
+  runtime: null
+  scope: project
+  owners:
+  - yureutaejin/agent-configs
+  - .
+  active_owner: yureutaejin/agent-configs
+  content_hash: null
+- kind: project-relative
+  target: claude
+  value: .claude/skills/pr-description/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - yureutaejin/agent-configs
+  - .
+  active_owner: yureutaejin/agent-configs
+  content_hash: sha256:9ee671b574be0de3cf89faba11cce93685428a98dcc1be63f759fac0205befbe
+- kind: project-relative
+  target: claude
+  value: .claude/skills/pr-description/references/format.md
+  runtime: null
+  scope: project
+  owners:
+  - yureutaejin/agent-configs
+  - .
+  active_owner: yureutaejin/agent-configs
+  content_hash: sha256:4c1b97e092e67688d557c1ce68c92aeb02e8bc0672bda282802b781ca3248c62
+- kind: project-relative
+  target: claude
+  value: .claude/skills/pr-description/scripts/collect-pr-context.sh
+  runtime: null
+  scope: project
+  owners:
+  - yureutaejin/agent-configs
+  - .
+  active_owner: yureutaejin/agent-configs
+  content_hash: sha256:27387103373d4590773eca2d76883e529bd96cadcb7b42c653e6b37ebc11b17a
+- kind: project-relative
+  target: codex
+  value: .agents/skills/pr-description
+  runtime: null
+  scope: project
+  owners:
+  - yureutaejin/agent-configs
+  - .
+  active_owner: yureutaejin/agent-configs
+  content_hash: null
+- kind: project-relative
+  target: codex
+  value: .agents/skills/pr-description/SKILL.md
+  runtime: null
+  scope: project
+  owners:
+  - yureutaejin/agent-configs
+  - .
+  active_owner: yureutaejin/agent-configs
+  content_hash: sha256:9ee671b574be0de3cf89faba11cce93685428a98dcc1be63f759fac0205befbe
+- kind: project-relative
+  target: codex
+  value: .agents/skills/pr-description/references/format.md
+  runtime: null
+  scope: project
+  owners:
+  - yureutaejin/agent-configs
+  - .
+  active_owner: yureutaejin/agent-configs
+  content_hash: sha256:4c1b97e092e67688d557c1ce68c92aeb02e8bc0672bda282802b781ca3248c62
+- kind: project-relative
+  target: codex
+  value: .agents/skills/pr-description/scripts/collect-pr-context.sh
+  runtime: null
+  scope: project
+  owners:
+  - yureutaejin/agent-configs
+  - .
+  active_owner: yureutaejin/agent-configs
+  content_hash: sha256:27387103373d4590773eca2d76883e529bd96cadcb7b42c653e6b37ebc11b17a
 local_deployed_files:
 - .agents/skills/pr-description
 - .agents/skills/pr-description/SKILL.md
@@ -36,9 +117,9 @@ local_deployed_files:
 - .claude/skills/pr-description/references/format.md
 - .claude/skills/pr-description/scripts/collect-pr-context.sh
 local_deployed_file_hashes:
-  .agents/skills/pr-description/SKILL.md: sha256:29ffb0c7c6be984d1128a3b95dd343849b859535641cdb0491d6ed77c57449ee
-  .agents/skills/pr-description/references/format.md: sha256:deac0b43fa2a057709ac4e5ecb7442304d1ef78e2bb76c56737d4f1d90488b68
-  .agents/skills/pr-description/scripts/collect-pr-context.sh: sha256:80f4085e02a119dce062ab131fc844b58f6bc3a330de773bca0497360fdf887e
-  .claude/skills/pr-description/SKILL.md: sha256:29ffb0c7c6be984d1128a3b95dd343849b859535641cdb0491d6ed77c57449ee
-  .claude/skills/pr-description/references/format.md: sha256:deac0b43fa2a057709ac4e5ecb7442304d1ef78e2bb76c56737d4f1d90488b68
-  .claude/skills/pr-description/scripts/collect-pr-context.sh: sha256:80f4085e02a119dce062ab131fc844b58f6bc3a330de773bca0497360fdf887e
+  .agents/skills/pr-description/SKILL.md: sha256:9ee671b574be0de3cf89faba11cce93685428a98dcc1be63f759fac0205befbe
+  .agents/skills/pr-description/references/format.md: sha256:4c1b97e092e67688d557c1ce68c92aeb02e8bc0672bda282802b781ca3248c62
+  .agents/skills/pr-description/scripts/collect-pr-context.sh: sha256:27387103373d4590773eca2d76883e529bd96cadcb7b42c653e6b37ebc11b17a
+  .claude/skills/pr-description/SKILL.md: sha256:9ee671b574be0de3cf89faba11cce93685428a98dcc1be63f759fac0205befbe
+  .claude/skills/pr-description/references/format.md: sha256:4c1b97e092e67688d557c1ce68c92aeb02e8bc0672bda282802b781ca3248c62
+  .claude/skills/pr-description/scripts/collect-pr-context.sh: sha256:27387103373d4590773eca2d76883e529bd96cadcb7b42c653e6b37ebc11b17a

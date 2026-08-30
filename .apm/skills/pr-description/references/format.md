@@ -2,23 +2,32 @@
 
 Produce these sections in this order.
 
+## Summary
+
+- Summarize the overall change in one or two short lines.
+- Make it understandable at a glance when reviewing concise `git log` output.
+- State the resulting user, system, or project-level outcome rather than
+  listing implementation steps.
+
 ## Changes
 
-- Describe what changed as a result of the diff.
-- Focus on important behavior, API, UI, data, config, docs, tooling, or test
-  changes that reviewers should know about.
-- Use a few concise bullets, grouped only when that improves readability.
-- Do not write a line-by-line explanation of the code.
+- Use concise bullets to describe the impact of the changes.
+- Focus on meaningful behavior, API, UI, data, configuration, documentation,
+  tooling, or test outcomes that reviewers should know about.
+- Do not enumerate implementation details or explain the code line by line.
 
-## Why
+## Details
 
-- Explain only the changes that genuinely need context.
-- Focus on why the change was made and what problem it solves.
-- Skip self-explanatory changes.
-- Address points a reviewer might question.
+- Include only context that `Changes` cannot convey clearly.
+- Explain relevant mechanisms and rationale when a reviewer needs them to
+  understand the change or its tradeoffs.
+- Omit this section when no additional detail is needed.
 
-## Test
+## Validation
 
-- List reproduction or verification steps a reviewer can follow.
-- Include test commands, test scenarios, manual checks, or a QA checklist.
-- Write `Not run` if testing was not performed or is not visible from context.
+- Use an unchecked Markdown checkbox list (`- [ ] ...`) so the user can track
+  validation.
+- List validation that was performed, or concrete validation that can be run.
+- Include relevant test commands, test scenarios, or manual checks.
+- When validation is unknown or was not performed, include an unchecked item
+  that states this explicitly.
