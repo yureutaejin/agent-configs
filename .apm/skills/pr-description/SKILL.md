@@ -68,6 +68,34 @@ the final PR description.
 - Do not include script section headings such as `Repository`, `Diff Content`, or
   `Recent Commits` in the final PR description.
 
+## Evidence Rules
+
+- State only behavior, project state, and validation results supported by the
+  collected context or the user's supplied information.
+- Do not infer motivation or write a `Details` explanation without a concrete
+  source such as a linked issue, user request, commit message, repository
+  documentation, or the diff itself. Omit `Details` when that context is absent.
+- Do not claim that a command, test, or manual check passed unless its result is
+  available in the conversation or collected context. List unperformed checks
+  separately with the reason they were not run.
+- Do not restate patch lines or paste raw command output as prose. Include
+  verbatim validation output only when it materially helps a reviewer; wrap long
+  output in a Markdown `<details>` block.
+- For a behavior change, connect each meaningful user-facing scenario to the
+  test, command, or manual check that demonstrates it. Skip this mapping only
+  for documentation-only, dependency/asset-only, or behavior-preserving refactor
+  changes, and state the applicable reason.
+
+## Drafting Depth
+
+- For documentation-only or mechanical changes, keep the description to
+  `Summary`, `Changes`, and `Validation` unless additional context is necessary.
+- For API, configuration, migration, or user-visible behavior changes, include
+  `Details` when it clarifies compatibility, risks, decisions, or trade-offs.
+- Include diagrams only when the actual diff has a non-trivial control flow,
+  data flow, or component relationship that cannot be communicated clearly in
+  concise prose. Do not add decorative diagrams.
+
 ## Output Rules
 
 - Return the PR description only, unless the user asks for analysis or a plan.
@@ -78,4 +106,6 @@ the final PR description.
 - Keep the description direct, factual, and skimmable.
 - Avoid line-by-line code explanations, hype, speculation, and raw command dumps.
 - Mention uncertainty explicitly instead of filling gaps.
+- Read `references/quality-checklist.md` before returning the description and
+  correct any applicable issue it identifies.
 - Preserve any repository-specific PR template if the user provides one.
